@@ -1,3 +1,5 @@
+using APIDemo2026AB.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,6 +26,12 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
+builder.Services.AddDbContext<ApplicationDbContext>(
+    options => options.UseSqlServer(
+        builder.Configuration.GetConnectionString(
+            "DefaultConnection")
+    )
+);
 
 var app = builder.Build();
 
